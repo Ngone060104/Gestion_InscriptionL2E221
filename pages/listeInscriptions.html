@@ -16,6 +16,10 @@
     <!-- Sidebar -->
     <aside id="sidebar"
         class="fixed inset-y-0 left-0 z-50 w-64 bg-[#b52a70] text-white transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 ease-in-out flex flex-col">
+        <!-- Bouton Fermer (Visible uniquement sur mobile) -->
+        <button class="lg:hidden absolute top-4 right-4 text-white/80 hover:text-white btn-close">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
         <div class="p-6 text- font-bold border-b border-pink-400/30">
             Gestion Inscription
         </div>
@@ -41,27 +45,33 @@
     <main class="flex-1 flex flex-col overflow-hidden">
 
         <!-- Top Navbar -->
-        <header class="bg-white m-4 rounded-xl shadow-sm p-4 flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <button onclick="toggleSidebar()" class="lg:hidden text-gray-600 mr-4">
+        <header class="bg-white m-4 rounded-xl shadow-sm p-4 flex justify-between items-center gap-2">
+            <!-- Titre et Menu -->
+            <div class="flex items-center min-w-max">
+                <button class="lg:hidden text-gray-600 mr-2 btn-menu">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
-                <h2 class="font-bold text-gray-700">Admin Dashbrd</h2>
+                <h2 class="font-bold text-gray-700 text-sm md:text-base hidden sm:block">Admin Dashbrd</h2>
             </div>
-            <div class="flex-1 max-w-md mx-8">
-                <input type="text" placeholder="-- recherche --"
-                    class="w-full bg-[#b52a70] text-white placeholder-pink-200 px-4 py-1.5 rounded-full outline-none text-center text-sm">
 
+            <!-- Barre de recherche flexible -->
+            <div class="flex-1 max-w-md mx-2 sm:mx-8">
+                <input type="text" placeholder="Recherche..."
+                    class="w-full bg-[#b52a70] text-white placeholder-pink-200 px-4 py-1.5 rounded-full outline-none text-center text-xs sm:text-sm">
             </div>
-            <div class="flex items-center gap-4">
-                <span class="text-black"><i class="fa-solid fa-moon"></i></span>
-                <span class="text-black"><i class="fa-solid fa-bell"></i></span>
-                <div class="flex items-center gap-2 border-l pl-4">
-                    <div class="text-right">
-                        <p class="text-xs text-gray-500">Bonjour Administrateur</p>
-                        <p class="text-sm font-bold text-gray-700">Admin</p>
+
+            <!-- Icônes et Profil -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <div class="hidden xs:flex items-center gap-3 text-black">
+                    <i class="fa-solid fa-moon cursor-pointer"></i>
+                    <i class="fa-solid fa-bell cursor-pointer"></i>
+                </div>
+                <div class="flex items-center gap-2 border-l pl-2 sm:pl-4">
+                    <div class="text-right hidden md:block">
+                        <p class="text-[10px] text-gray-500">Administrateur</p>
+                        <p class="text-xs font-bold text-gray-700">Admin</p>
                     </div>
-                    <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gray-300 rounded-full overflow-hidden flex-shrink-0">
                         <img src="https://ui-avatars.com" alt="avatar">
                     </div>
                 </div>
@@ -79,24 +89,34 @@
             </section>
             <!-- filtre -->
             <!-- <section class="bg-pink-100 p-6 rounded-xl border-l-8 border-pink-500"> -->
-            <div class="bg-white p-4 rounded-lg shadow-sm mb-6 flex items-center space-x-4">
-                <span class="font-bold text-gray-700">Filtres</span>
-                <div class="relative flex-1 max-w-xs">
-                    <input type="text" placeholder="Recherche par Nom ............."
-                        class="w-full border border-purple-300 rounded-lg px-4 py-1 text-sm focus:ring-2 focus:ring-purple-400 outline-none">
-                    <span class="absolute right-3 top-1 text-purple-400"><i class="fas fa-search"></i></span>
+            <!-- Section Filtres Adaptative -->
+            <div class="bg-white p-4 rounded-lg shadow-sm mb-6 flex flex-col lg:flex-row items-center gap-4">
+
+                <!-- Titre et Recherche -->
+                <div class="flex items-center w-full lg:w-auto gap-4">
+                    <span class="font-bold text-gray-700">Filtres</span>
+                    <div class="relative flex-1">
+                        <input type="text" placeholder="Recherche par Nom..."
+                            class="w-full border border-purple-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-purple-400 outline-none">
+                        <span class="absolute right-3 top-2.5 text-purple-400"><i class="fas fa-search"></i></span>
+                    </div>
                 </div>
-                <button
-                    class="bg-[#bc1474] hover:bg-[#a01163] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-plus"></i>
-                    Nouvelle Inscription
-                </button>
-                <button
-                    class="bg-[#bc1474] hover:bg-[#a01163] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md transition-all flex items-center gap-2">
-                    <i class="fas fa-undo"></i>
-                   Restaurer
-                </button>
+
+                <!-- Boutons d'action (s'étirent sur mobile) -->
+                <div class="flex flex-col sm:flex-row gap-2 w-full lg:w-auto lg:ml-auto">
+                    <button id="btn-nouvelle-inscription"
+                        class="bg-[#bc1474] hover:bg-[#a01163] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-plus"></i>
+                        Nouvelle Inscription
+                    </button>
+                    <button id=""
+                        class="bg-[#bc1474] hover:bg-[#a01163] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-undo"></i>
+                        Restaurer
+                    </button>
+                </div>
             </div>
+
 
 
 
@@ -129,7 +149,8 @@
                                 <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
                                 <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
-                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile</td>
+                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile
+                                </td>
                                 <td class="px-6 py-4">
                                     <div class="flex justify-center gap-3">
                                         <button class="text-green-600"><i
@@ -146,7 +167,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
                                 <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
-                                 <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 2 Design UI/UX</td>
+                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 2 Design UI/UX</td>
                                 <td class="px-6 py-4">
                                     <div class="flex justify-center gap-3">
                                         <button class="text-green-600"><i
@@ -163,7 +184,8 @@
                                 <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
                                 <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
                                 <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
-                                 <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile</td>
+                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile
+                                </td>
                                 <td class="px-6 py-4">
                                     <div class="flex justify-center gap-3">
                                         <button class="text-green-600"><i
@@ -180,21 +202,109 @@
             </section>
 
         </div>
-
-        <!-- Footer -->
-
     </main>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
+    
+    <!-- Modal d'inscription avec nouveau design -->
+    <dialog id="modalInscription"
+        class=" fixed inset-0 m-auto rounded-3xl shadow-2xl p-0 w-11/12 max-w-xl backdrop:bg-black/80 overflow-hidden max-h-[90vh]">
 
-            // Alterne l'affichage de la sidebar et du fond sombre
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-    </script>
+        <div class="flex flex-col h-full max-h-[90vh] ">
+            <!-- Header stylé -->
+            <div class="bg-gradient-to-r from-[#bc1474] to-[#e01a8a] p-6 text-white shrink-0">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold">Nouvelle Inscription</h3>
+                        <p class="text-pink-100 text-xs mt-1">Remplissez les informations de l'étudiant</p>
+                    </div>
+                    <button
+                        class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 transition-all"
+                        id="btn-close-modal">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+            </div>
 
+            <!-- Corps du formulaire avec scroll forcé -->
+            <form class="p-6 md:p-8 overflow-y-auto bg-gray-50/50">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Groupe : État civil -->
+                    <div class="space-y-4 md:col-span-2">
+                        <h4
+                            class="text-[#bc1474] font-bold text-xs uppercase tracking-widest border-b border-pink-100 pb-2">
+                            Identité</h4>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-gray-500 ml-1">PRÉNOM</label>
+                        <input type="text"
+                            class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
+                            placeholder="Awa">
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-gray-500 ml-1">NOM</label>
+                        <input type="text"
+                            class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
+                            placeholder="Diop">
+                    </div>
+
+                    <!-- Groupe : Contact -->
+                    <div class="space-y-4 md:col-span-2 mt-4">
+                        <h4
+                            class="text-[#bc1474] font-bold text-xs uppercase tracking-widest border-b border-pink-100 pb-2">
+                            Coordonnées & Études</h4>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-gray-500 ml-1">EMAIL</label>
+                        <input type="email"
+                            class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
+                            placeholder="awa@gmail.sn">
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-xs font-bold text-gray-500 ml-1">TÉLÉPHONE</label>
+                        <input type="tel"
+                            class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
+                            placeholder="77 000 00 00">
+                    </div>
+
+                    <div class="md:col-span-2 space-y-1">
+                        <label class="text-xs font-bold text-gray-500 ml-1">ADRESSE</label>
+                        <input type="text"
+                            class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
+                            placeholder="Dakar, Plateau">
+                    </div>
+
+                    <div class="md:col-span-2 space-y-1">
+                        <label class="text-xs font-bold text-gray-500 ml-1">FORMATION SOUHAITÉE</label>
+                        <select
+                            class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] outline-none appearance-none">
+                            <option>Licence 1 Dev Web Mobile</option>
+                            <option>Licence 2 Design UI/UX</option>
+                            <option>Master Data Science</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Footer du formulaire -->
+                <div class="flex flex-col sm:flex-row gap-3 mt-10">
+                    <button type="button"
+                        class="flex-1 order-2 sm:order-1 px-6 py-3 border-2 border-gray-200 rounded-xl text-gray-600 font-bold hover:bg-gray-100 transition-all">
+                        Annuler
+                    </button>
+                    <button type="submit"
+                        class="flex-1 order-1 sm:order-2 px-6 py-3 bg-[#bc1474] text-white rounded-xl font-bold shadow-lg shadow-pink-200 hover:bg-[#a01163] transition-all">
+                        Confirmer l'inscription
+                    </button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+
+
+
+    <script type="module" src="../js/app.js"></script>
 </body>
 
 </html>
