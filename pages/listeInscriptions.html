@@ -203,7 +203,7 @@
 
         </div>
     </main>
-    
+
     <!-- Modal d'inscription avec nouveau design -->
     <dialog id="modalInscription"
         class=" fixed inset-0 m-auto rounded-3xl shadow-2xl p-0 w-11/12 max-w-xl backdrop:bg-black/80 overflow-hidden max-h-[90vh]">
@@ -225,7 +225,7 @@
             </div>
 
             <!-- Corps du formulaire avec scroll forcé -->
-            <form class="p-6 md:p-8 overflow-y-auto bg-gray-50/50">
+            <form id="contactForm" class="p-6 md:p-8 overflow-y-auto bg-gray-50/50">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Groupe : État civil -->
                     <div class="space-y-4 md:col-span-2">
@@ -236,19 +236,19 @@
 
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-gray-500 ml-1">PRÉNOM</label>
-                        <input type="text"
+                        <input type="text" id="prenom" name="prenom"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
                             placeholder="Awa">
-                              <span id="error-prenom" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-prenom" class="text-[10px] text-red-500 font-medium ml-1"></span>
                     </div>
 
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-gray-500 ml-1">NOM</label>
-                        <input type="text"
+                        <input type="text" id="nom" name="nom"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
                             placeholder="Diop">
-                             <span id="error-nom" class="text-[10px] text-red-500 font-medium ml-1"></span>
-                    
+                        <span id="error-nom" class="text-[10px] text-red-500 font-medium ml-1"></span>
+
                     </div>
 
                     <!-- Groupe : Contact -->
@@ -260,42 +260,42 @@
 
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-gray-500 ml-1">EMAIL</label>
-                        <input type="email"
+                        <input type="email" id="email" name="email"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
                             placeholder="awa@gmail.sn">
-                             <span id="error-email" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-email" class="text-[10px] text-red-500 font-medium ml-1"></span>
                     </div>
-                   
+
 
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-gray-500 ml-1">TÉLÉPHONE</label>
-                        <input type="tel"
+                        <input type="tel" id="telephone" name="telephone"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
                             placeholder="77 000 00 00">
-                             <span id="error-telephone" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-telephone" class="text-[10px] text-red-500 font-medium ml-1"></span>
                     </div>
-                    
+
 
                     <div class="md:col-span-2 space-y-1">
                         <label class="text-xs font-bold text-gray-500 ml-1">ADRESSE</label>
-                        <input type="text"
+                        <input type="text" id="adresse" name="adresse"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
                             placeholder="Dakar, Plateau">
-                             <span id="error-adresse" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-adresse" class="text-[10px] text-red-500 font-medium ml-1"></span>
                     </div>
-                   
+
 
                     <div class="md:col-span-2 space-y-1">
                         <label class="text-xs font-bold text-gray-500 ml-1">FORMATION SOUHAITÉE</label>
-                        <select
+                        <select name=""
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] outline-none appearance-none">
                             <option>Licence 1 Dev Web Mobile</option>
                             <option>Licence 2 Design UI/UX</option>
                             <option>Master Data Science</option>
                         </select>
-                         <span id="error-formation" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-formation" class="text-[10px] text-red-500 font-medium ml-1"></span>
                     </div>
-                    
+
                 </div>
 
                 <!-- Footer du formulaire -->
