@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Inscription</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="bg-gray-100 flex h-screen overflow-hidden">
+    <!-- Sidebar -->
+    <aside id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 w-64 bg-[#b52a70] text-white transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-6 text- font-bold border-b border-pink-400/30">
+            Gestion Inscription
+        </div>
+        <nav class="flex-1 mt-6 p-4 space-y-2">
+            <a href="./dashboard.html" class="flex items-center p-3 bg-white/10 rounded-lg text-sm"><i
+                    class="fa-solid fa-table-cells-large mr-3"></i><span class="mr-3"></span> Dashboard</a>
+            <a href="#" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                    class="fa-solid fa-users mr-3"></i><span class="mr-3"></span> Listes Étudiants</a>
+            <a href="#" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                    class="fa-solid fa-book mr-3"></i><span class="mr-3"></span> Listes Formations</a>
+            <a href="#" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                    class="fa-solid fa-envelopes-bulk mr-3"></i><span class="mr-3"></span> Listes Demandes</a>
+            <a href="#" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                    class="fa-solid fa-pen-to-square mr-3"></i><span class="mr-3"></span> Listes Inscriptions</a>
+        </nav>
+    </aside>
+    <!-- 1. L'overlay (fond sombre) -->
+    <div id="overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+
+        <!-- Top Navbar -->
+        <header class="bg-white m-4 rounded-xl shadow-sm p-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <button onclick="toggleSidebar()" class="lg:hidden text-gray-600 mr-4">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h2 class="font-bold text-gray-700">Admin Dashbrd</h2>
+            </div>
+            <div class="flex-1 max-w-md mx-8">
+                <input type="text" placeholder="-- recherche --"
+                    class="w-full bg-[#b52a70] text-white placeholder-pink-200 px-4 py-1.5 rounded-full outline-none text-center text-sm">
+
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-black"><i class="fa-solid fa-moon"></i></span>
+                <span class="text-black"><i class="fa-solid fa-bell"></i></span>
+                <div class="flex items-center gap-2 border-l pl-4">
+                    <div class="text-right">
+                        <p class="text-xs text-gray-500">Bonjour Administrateur</p>
+                        <p class="text-sm font-bold text-gray-700">Admin</p>
+                    </div>
+                    <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                        <img src="https://ui-avatars.com" alt="avatar">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-6">
+
+            <!-- Banner Title -->
+            <section class="bg-pink-100 p-6 rounded-xl border-l-8 border-pink-500">
+                <h1 class="text-lg font-black text-gray-800 uppercase tracking-wide">
+                    Admin Dashbord --> Liste des inscriptions
+                </h1>
+            </section>
+            <!-- filtre -->
+            <!-- <section class="bg-pink-100 p-6 rounded-xl border-l-8 border-pink-500"> -->
+            <div class="bg-white p-4 rounded-lg shadow-sm mb-6 flex items-center space-x-4">
+                <span class="font-bold text-gray-700">Filtres</span>
+                <div class="relative flex-1 max-w-xs">
+                    <input type="text" placeholder="Recherche par Nom ............."
+                        class="w-full border border-purple-300 rounded-lg px-4 py-1 text-sm focus:ring-2 focus:ring-purple-400 outline-none">
+                    <span class="absolute right-3 top-1 text-purple-400"><i class="fas fa-search"></i></span>
+                </div>
+                <button
+                    class="bg-[#bc1474] hover:bg-[#a01163] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i>
+                    Nouvelle Inscription
+                </button>
+                <button
+                    class="bg-[#bc1474] hover:bg-[#a01163] text-white px-5 py-2 rounded-lg text-sm font-bold shadow-md transition-all flex items-center gap-2">
+                    <i class="fas fa-undo"></i>
+                   Restaurer
+                </button>
+            </div>
+
+
+
+            <section class="bg-pink-100 rounded-2xl shadow-sm border border-gray-100 overflow-hidden px-5 py-2">
+                <!-- En-tête du tableau -->
+                <div class="p-5 font-bold text-lg">
+                    Liste inscriptions
+                </div>
+
+                <!-- Conteneur avec scroll horizontal si nécessaire -->
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse text-center  ">
+                        <thead class="bg-[#bc1474] text-white/90 uppercase text-xs text-center">
+                            <tr>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Matricule</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Nom</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Prénom</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Adresse</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Email</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Telephone</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Formations</th>
+                                <th class="px-6 py-4 text-center font-bold tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 bg-white">
+                            <tr class="hover:bg-pink-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">MAT001</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Fall</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Diawara</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
+                                <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
+                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex justify-center gap-3">
+                                        <button class="text-green-600"><i
+                                                class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="text-red-600"><i class="fa-solid fa-trash"></i></button>
+                                        <button class="text-blue-600"><i class="fa-solid fa-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-pink-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">MAT002</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Fall</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Diawara</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
+                                <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
+                                 <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 2 Design UI/UX</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex justify-center gap-3">
+                                        <button class="text-green-600"><i
+                                                class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="text-red-600"><i class="fa-solid fa-trash"></i></button>
+                                        <button class="text-blue-600"><i class="fa-solid fa-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-pink-50 transition-colors">
+                                <td class="px-6 py-4 text-sm text-gray-800">MAT003</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Fall</td>
+                                <td class="px-6 py-4 text-sm text-gray-800">Diawara</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
+                                <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
+                                 <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex justify-center gap-3">
+                                        <button class="text-green-600"><i
+                                                class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="text-red-600"><i class="fa-solid fa-trash"></i></button>
+                                        <button class="text-blue-600"><i class="fa-solid fa-eye"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Ajoute tes autres lignes ici -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+
+    </main>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            // Alterne l'affichage de la sidebar et du fond sombre
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+    </script>
+
+</body>
+
+</html>
