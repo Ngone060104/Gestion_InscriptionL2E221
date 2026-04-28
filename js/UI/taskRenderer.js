@@ -6,14 +6,14 @@ import { domElements } from '../DOM/elements.js';
 export function addStudentToTable(student, container) {
     const tr = document.createElement('tr');
     tr.className = "hover:bg-pink-50 transition-colors border-b border-gray-100";
-    tr.dataset.id = student.id; 
+    tr.dataset.id = student.id;
     tr.innerHTML = `
-    <td class="px-6 py-4 text-sm text-gray-800 font-medium">${student.prenom}</td>
-    <td class="px-6 py-4 text-sm text-gray-800 font-medium">${student.nom}</td>
-        <td class="px-6 py-4 text-sm text-gray-600 font-medium ">${student.email}</td>
-        <td class="px-6 py-4 text-sm text-gray-600 font-medium ">${student.adresse}</td>
-        <td class="px-6 py-4 text-sm font-mono text-gray-600 font-medium ">${student.telephone}</td>
-       <td class="px-6 py-4 text-sm text-gray-600 font-medium"> ${student.niveau} ${student.filiere}</td>
+    <td class="px-6 py-4 text-sm text-gray-800 font-medium text-left ">${student.prenom}</td>
+    <td class="px-6 py-4 text-sm text-gray-800 font-medium text-left ">${student.nom}</td>
+        <td class="px-6 py-4 text-sm text-gray-600 font-medium text-left  ">${student.email}</td>
+        <td class="px-6 py-4 text-sm text-gray-600 font-medium text-left ">${student.adresse}</td>
+        <td class="px-6 py-4 text-sm font-mono text-gray-600 font-medium text-left  ">${student.telephone}</td>
+       <td class="px-6 py-4 text-sm text-gray-600 font-medium text-left "> ${student.niveau} ${student.filiere}</td>
         <td class="px-6 py-4">
             <div class="flex justify-center gap-3">
                 <button class="text-green-600 hover:scale-110 transition-transform"><i class="fa-solid fa-pen-to-square"></i></button>
