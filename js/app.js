@@ -2,9 +2,9 @@ import * as DOM from './DOM/elements.js';
 import './pages/dashboard.js';
 import './pages/popup.js';
 import { domElements } from './DOM/elements.js';
-import { openModal, closeModal } from './UI/modalRenderer.js';
+import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer } from './UI/modalRenderer.js';
 import { initNavigation } from './UI/navigationRenderer.js';
-import { createInscription } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
+import { createInscription, renderArchive ,updateInscription} from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
 import { addStudentToTable } from '../js/UI/taskRenderer.js';
 import { getInscription, saveInscriptions, initApp } from '../js/Stores/taskStores.js';
 import { validateForm, clearErrors, showErrors } from '../js/Utiles/utile.js';
@@ -28,27 +28,27 @@ if (domElements.formInscription) {
             select_filiere: document.getElementById('select_filiere').value
         };
 
-        const errors = validateForm(formData);
+        const errors = validateForm(formData, editMode ? currentEditId : null);
 
         if (Object.keys(errors).length > 0) {
             showErrors(errors);
             return;
         }
 
+        
+            // Sinon, on crée une nouvelle inscription
+            createInscription(formData);
+            showToast('success', 'Succès', `${formData.prenom} a été inscrit avec succès !`);
+        
 
-        const newInscription = createInscription(formData);
-        const row = addStudentToTable(newInscription);
-        if (domElements.tableBody) {
-            domElements.tableBody.appendChild(row);
-        }
-
+        // On rafraîchit tout le tableau pour voir les changements
+        initApp();
         domElements.formInscription.reset();
         closeModal();
-        // ... après l'ajout réussi dans le tableau
-        showToast('success', 'Succès', `${formData.prenom} a été inscrit avec succès !`);
 
     });
 }
+
 if (domElements.annuler) {
     domElements.annuler.addEventListener('click', () => {
         closeModal()
@@ -56,5 +56,23 @@ if (domElements.annuler) {
         domElements.formInscription.reset()
     })
 }
+
+
+domElements.restore.addEventListener('click', openArchiveDrawer);
+domElements.btnCloseDrawer.addEventListener('click', closeArchiveDrawer);
+domElements.drawerOverlay.addEventListener('click', closeArchiveDrawer);
+
+
+domElements.BtnOpen.addEventListener('click', () => {
+    editMode = false;
+    currentEditId = null;
+    domElements.formInscription.reset();
+    clearErrors();
+    document.querySelector('#modalInscription h3').textContent = "Nouvelle Inscription";
+    openModal();
+});
+
+
+
 
 initApp();

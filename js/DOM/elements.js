@@ -20,7 +20,12 @@ export const domElements = {
     tableBody: document.querySelector('tbody'),
     formInscription: document.querySelector('#modalInscription form'),
     contactForm: document.getElementById("contactForm"),
-    annuler : document.getElementById("annuler")
-    // le conteneur des cartes
+    annuler : document.getElementById("annuler"),
+    drawer_archive : document.getElementById("drawer_archive"),
+    archive_list : document.getElementById("archive_list"),
+    restore : document.getElementById("restore"),
+     btnCloseDrawer: document.getElementById('close_drawer'),
+     drawerOverlay: document.getElementById('drawer_overlay')
+    // le conteneur des cartes 
 };
 
