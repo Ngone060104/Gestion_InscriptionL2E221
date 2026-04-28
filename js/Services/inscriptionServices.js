@@ -1,4 +1,6 @@
 import { getInscription, saveInscriptions } from '../Stores/taskStores.js';
+import { domElements } from '../DOM/elements.js';
+import { renderArchiveCard } from '../UI/taskRenderer.js';
 
 export function createInscription(data) {
     const inscriptions = getInscription();
@@ -20,3 +22,32 @@ export function createInscription(data) {
     saveInscriptions(inscriptions);
     return inscription;
 }
+
+
+export function renderArchive() {
+    const inscriptions = getInscription();
+    // On ne prend que ceux qui sont archivés (status === false)
+    const archivedStudents = inscriptions.filter(inst => inst.status === false);
+
+    // On vide la liste actuelle dans le Drawer
+    domElements.archive_list.innerHTML = '';
+
+    if (archivedStudents.length === 0) {
+        domElements.archive_list.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full text-center opacity-40">
+            <div class="text-center py-10 opacity-40">
+              <i class="fa-solid fa-box-archive text-5xl mb-3 text-gray-300"></i>
+                <p class="text-sm font-medium text-gray-500">Aucun élément archivé</p>
+                </div>
+            </div>
+            `;
+        return;
+    }
+    // On injecte chaque carte
+    archivedStudents.forEach(student => {
+        const card = renderArchiveCard(student);
+        domElements.archive_list.appendChild(card);
+    });
+}
+
+

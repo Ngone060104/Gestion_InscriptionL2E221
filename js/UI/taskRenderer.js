@@ -27,3 +27,23 @@ export function addStudentToTable(student, container) {
 }
 
 
+export function renderArchiveCard(student) {
+    const div = document.createElement('div');
+    div.className = "p-3 bg-gray-50 rounded-xl border border-gray-100 flex justify-between items-center shadow-sm";
+    div.innerHTML = `
+        <div>
+            <p class="text-sm font-bold text-gray-800">${student.prenom} ${student.nom}</p>
+            <p class="text-[10px] text-gray-500">${student.email} ${student.adresse}</p>
+            <p class="text-[10px] text-gray-500">${student.telephone} ${student.niveau}</p>
+            <p class="text-[10px] text-gray-500">${student.filiere}</p>
+        </div>
+        <button class="btn-restore text-[#bc1474] hover:bg-pink-100 p-2 rounded-full transition-colors" data-id="${student.id}" title="Restaurer">
+            <i class="fa-solid fa-rotate-left"></i>
+        </button>
+    `;
+    return div;
+}
+
+
+
+
