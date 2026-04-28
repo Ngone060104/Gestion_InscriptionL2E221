@@ -11,7 +11,7 @@ const isContactTaken = (telephone, currentId, usersList) => {
     );
 };
 
-const PHONE_REGEX = /^(70|71|75|76|77|78)\d{7}$/;
+const PHONE_REGEX = /^((\+221|00221)?(70|71|75|76|77|78)\d{7})|((\+220|00220)?[235679]\d{6})$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
@@ -73,8 +73,8 @@ export function validateForm(data, currentId = null) {
     }
     if (!data.telephone.trim())
         errors.telephone = "Le numéro est requis.";
-    else if (!PHONE_REGEX.test(data.telephone.trim()))
-        errors.telephone = "Format invalide. Ex: 771234567 (70/71/75/76/77/78 + 7 chiffres)";
+    else if (!PHONE_REGEX.test(data.telephone.trim().replace(/\s/g, "")))
+        errors.telephone = "Format invalide (Sénégal +221 ou Gambie +220 requis).";
     else if (isContactTaken(data.telephone, currentId, inscriptions)) { // Appel de la fonction
         errors.telephone = "Ce numéro appartient déjà à quelqu'un.";
     }

@@ -7,14 +7,17 @@ import { initNavigation } from './UI/navigationRenderer.js';
 import { createInscription } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
 import { addStudentToTable } from '../js/UI/taskRenderer.js';
 import { getInscription, saveInscriptions, initApp } from '../js/Stores/taskStores.js';
-import { validateForm ,clearErrors ,showErrors} from '../js/Utiles/utile.js';
+import { validateForm, clearErrors, showErrors } from '../js/Utiles/utile.js';
+import { showToast, dismissToast } from './UI/messageRenderer.js';
 
 
 if (domElements.formInscription) {
     domElements.formInscription.addEventListener('submit', (e) => {
         console.log("coucou")
         e.preventDefault();
+
         clearErrors()
+
         const formData = {
             prenom: document.getElementById('prenom').value,
             nom: document.getElementById('nom').value,
@@ -26,6 +29,7 @@ if (domElements.formInscription) {
         };
 
         const errors = validateForm(formData);
+
         if (Object.keys(errors).length > 0) {
             showErrors(errors);
             return;
@@ -40,7 +44,17 @@ if (domElements.formInscription) {
 
         domElements.formInscription.reset();
         closeModal();
+        // ... après l'ajout réussi dans le tableau
+        showToast('success', 'Succès', `${formData.prenom} a été inscrit avec succès !`);
+
     });
+}
+if (domElements.annuler) {
+    domElements.annuler.addEventListener('click', () => {
+        closeModal()
+        clearErrors()
+        domElements.formInscription.reset()
+    })
 }
 
 initApp();

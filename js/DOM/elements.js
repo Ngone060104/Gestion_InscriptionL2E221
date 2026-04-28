@@ -19,7 +19,8 @@ export const domElements = {
     confirm: document.getElementById("confirm"),
     tableBody: document.querySelector('tbody'),
     formInscription: document.querySelector('#modalInscription form'),
-    contactForm: document.getElementById("contactForm")
+    contactForm: document.getElementById("contactForm"),
+    annuler : document.getElementById("annuler")
     // le conteneur des cartes
 };
 

@@ -11,6 +11,7 @@ export function createInscription(data) {
         adresse: data.adresse.trim(),
         niveau: data.select_niveau,
         filiere: data.select_filiere,
+        etat: true,
         date: new Date().toLocaleDateString("fr-FR", {
             day: "2-digit", month: "short", year: "numeric"
         }),
