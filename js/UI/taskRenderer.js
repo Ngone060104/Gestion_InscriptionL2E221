@@ -1,23 +1,29 @@
 
-import '../Stores/taskStores';
-import { getInscription, saveInscriptions } from '../Stores/taskStores';
+import '../Stores/taskStores.js';
+import { domElements } from '../DOM/elements.js';
 
-export function createInscription(data) {
-    const inscriptions = getInscription();
-    const inscription = {
-        id: Date.now(),
-        prenom: data.prenom.trim(),
-        nom: data.nom.trim(),
-        email: data.email.trim().toLowerCase(),
-        telephone: data.telephone.trim(),
-        adresse: data.telephone.trim(),
-        niveau: data.select_niveau,
-        filiere: data.select_filiere,
-        createdAt: new Date().toLocaleDateString("fr-FR", {
-            day: "2-digit", month: "short", year: "numeric"
-        }),
-    };
-    inscriptions.push(inscription);
-    saveInscriptions(inscriptions);
-    return inscription;
+// js/UI/tableRenderer.js
+export function addStudentToTable(student, container) {
+    const tr = document.createElement('tr');
+    tr.className = "hover:bg-pink-50 transition-colors border-b border-gray-100";
+    tr.dataset.id = student.id; 
+    tr.innerHTML = `
+    <td class="px-6 py-4 text-sm text-gray-800 font-medium">${student.prenom}</td>
+    <td class="px-6 py-4 text-sm text-gray-800 font-medium">${student.nom}</td>
+        <td class="px-6 py-4 text-sm text-gray-600 font-medium ">${student.email}</td>
+        <td class="px-6 py-4 text-sm text-gray-600 font-medium ">${student.adresse}</td>
+        <td class="px-6 py-4 text-sm font-mono text-gray-600 font-medium ">${student.telephone}</td>
+       <td class="px-6 py-4 text-sm text-gray-600 font-medium"> ${student.niveau} ${student.filiere}</td>
+        <td class="px-6 py-4">
+            <div class="flex justify-center gap-3">
+                <button class="text-green-600 hover:scale-110 transition-transform"><i class="fa-solid fa-pen-to-square"></i></button>
+                <button class="text-red-600 hover:scale-110 transition-transform"><i class="fa-solid fa-trash"></i></button>
+                <button class="text-blue-600 hover:scale-110 transition-transform"><i class="fa-solid fa-eye"></i></button>
+            </div>
+        </td>
+    `;
+
+    return tr
 }
+
+

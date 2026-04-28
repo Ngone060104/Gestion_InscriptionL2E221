@@ -120,7 +120,7 @@
 
 
 
-            <section class="bg-pink-100 rounded-2xl shadow-sm border border-gray-100 overflow-hidden px-5 py-2">
+            <section class="bg-pink-100 rounded-2xl shadow-sm border border-gray-100 overflow-hidden px-5 py-2 ">
                 <!-- En-tête du tableau -->
                 <div class="p-5 font-bold text-lg">
                     Liste inscriptions
@@ -131,70 +131,18 @@
                     <table class="w-full border-collapse text-center  ">
                         <thead class="bg-[#bc1474] text-white/90 uppercase text-xs text-center">
                             <tr>
-                                <th class="px-6 py-4 text-left font-bold tracking-wider">Matricule</th>
-                                <th class="px-6 py-4 text-left font-bold tracking-wider">Nom</th>
+                             
                                 <th class="px-6 py-4 text-left font-bold tracking-wider">Prénom</th>
-                                <th class="px-6 py-4 text-left font-bold tracking-wider">Adresse</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Nom</th>
                                 <th class="px-6 py-4 text-left font-bold tracking-wider">Email</th>
+                                <th class="px-6 py-4 text-left font-bold tracking-wider">Adresse</th>
                                 <th class="px-6 py-4 text-left font-bold tracking-wider">Telephone</th>
                                 <th class="px-6 py-4 text-left font-bold tracking-wider">Formations</th>
                                 <th class="px-6 py-4 text-center font-bold tracking-wider">Action</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 bg-white">
-                            <tr class="hover:bg-pink-50 transition-colors">
-                                <td class="px-6 py-4 text-sm text-gray-800">MAT001</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">Fall</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">Diawara</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
-                                <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
-                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex justify-center gap-3">
-                                        <button class="text-green-600"><i
-                                                class="fa-solid fa-pen-to-square"></i></button>
-                                        <button class="text-red-600"><i class="fa-solid fa-trash"></i></button>
-                                        <button class="text-blue-600"><i class="fa-solid fa-eye"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-pink-50 transition-colors">
-                                <td class="px-6 py-4 text-sm text-gray-800">MAT002</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">Fall</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">Diawara</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
-                                <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
-                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 2 Design UI/UX</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex justify-center gap-3">
-                                        <button class="text-green-600"><i
-                                                class="fa-solid fa-pen-to-square"></i></button>
-                                        <button class="text-red-600"><i class="fa-solid fa-trash"></i></button>
-                                        <button class="text-blue-600"><i class="fa-solid fa-eye"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-pink-50 transition-colors">
-                                <td class="px-6 py-4 text-sm text-gray-800">MAT003</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">Fall</td>
-                                <td class="px-6 py-4 text-sm text-gray-800">Diawara</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">Medina</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">fat@gmail.com</td>
-                                <td class="px-6 py-4 text-sm font-mono text-gray-600">771001010</td>
-                                <td class="px-6 py-4 text-sm font-mono text-gray-600">Licence 1 Developpement Web Mobile
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="flex justify-center gap-3">
-                                        <button class="text-green-600"><i
-                                                class="fa-solid fa-pen-to-square"></i></button>
-                                        <button class="text-red-600"><i class="fa-solid fa-trash"></i></button>
-                                        <button class="text-blue-600"><i class="fa-solid fa-eye"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
+                           
                             <!-- Ajoute tes autres lignes ici -->
                         </tbody>
                     </table>
@@ -239,7 +187,7 @@
                         <input type="text" id="prenom" name="prenom"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
                             placeholder="Awa">
-                        <span id="error-prenom" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-prenom" class="text-[10px] text-red-500 font-medium ml-1 "></span>
                     </div>
 
                     <div class="space-y-1">
@@ -272,7 +220,7 @@
                         <input type="tel" id="telephone" name="telephone"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] focus:ring-0 outline-none transition-all"
                             placeholder="77 000 00 00">
-                        <span id="error-telephone" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-telephone" class="text-[10px] text-red-500 font-medium ml-1 "></span>
                     </div>
 
 
@@ -285,30 +233,20 @@
                     </div>
 
 
-                    <!-- <div class="md:col-span-2 space-y-1">
-                        <label class="text-xs font-bold text-gray-500 ml-1">FORMATION SOUHAITÉE</label>
-                        <select name=""
-                            class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] outline-none appearance-none">
-                            <option>Licence 1 Dev Web Mobile</option>
-                            <option>Licence 2 Design UI/UX</option>
-                            <option>Master Data Science</option>
-                        </select>
-                        <span id="error-formation" class="text-[10px] text-red-500 font-medium ml-1"></span>
-                    </div> -->
 
                     <!-- NIVEAU -->
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-gray-500 ml-1">NIVEAU</label>
                         <select id="select_niveau"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] outline-none appearance-none">
-                            <option value="" disabled selected>Choisir niveau</option>
+                            <option value="">Choisir niveau</option>
                             <option value="L1">Licence 1</option>
                             <option value="L2">Licence 2</option>
                             <option value="L3">Licence 3</option>
                             <option value="L3">Master 1</option>
                             <option value="L3">Master 2</option>
                         </select>
-                        <span id="error-niveau" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-select_niveau" class="text-[10px] text-red-500 font-medium"></span>
                     </div>
 
                     <!-- FILIÈRE -->
@@ -316,7 +254,7 @@
                         <label class="text-xs font-bold text-gray-500 ml-1">FILIÈRE</label>
                         <select id="select_filiere"
                             class="w-full bg-white border-2 border-gray-100 rounded-xl p-3 focus:border-[#bc1474] outline-none appearance-none">
-                            <option value="" disabled selected>Choisir filière</option>
+                            <option value="">Choisir filière</option>
                             <option value="Dev Web Mobile">Dev Web Mobile</option>
                             <option value="Design UI/UX">Design UI/UX</option>
                             <option value="Data Science">Data Science</option>
@@ -324,7 +262,7 @@
                             <option value="Génie Logiciel">Génie Logiciel</option>
                             <option value="Architecture des données">Architecture des données</option>
                         </select>
-                        <span id="error-filiere" class="text-[10px] text-red-500 font-medium ml-1"></span>
+                        <span id="error-select_filiere" class="text-[10px] text-red-500 font-medium"></span>
                     </div>
 
 

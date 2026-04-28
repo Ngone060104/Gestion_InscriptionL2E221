@@ -8,19 +8,18 @@ export const domElements = {
     modal: document.getElementById('modalInscription'),
     BtnOpen: document.querySelector('#btn-nouvelle-inscription'),
     BtnClose: document.querySelector('#btn-close-modal'),
-    contactForm: document.getElementById("contactForm"),
     prenom: document.getElementById("prenom"),
     nom: document.getElementById("nom"),
     email: document.getElementById("email"),
     telephone: document.getElementById("telephone"),
     adresse: document.getElementById("adresse"),
-    select_niveau : document.getElementById("select-niveau"),
-    select_filiere : document.getElementById("select_filiere"),
-    annuler : document.getElementById("annuler"),
-    confirm : document.getElementById("confirm")
-
-
-
+    select_niveau: document.getElementById("select_niveau"),
+    select_filiere: document.getElementById("select_filiere"),
+    annuler: document.getElementById("annuler"),
+    confirm: document.getElementById("confirm"),
+    tableBody: document.querySelector('tbody'),
+    formInscription: document.querySelector('#modalInscription form'),
+    contactForm: document.getElementById("contactForm")
     // le conteneur des cartes
 };
 
