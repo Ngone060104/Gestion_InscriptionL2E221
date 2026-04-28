@@ -49,5 +49,23 @@ export function renderArchive() {
         domElements.archive_list.appendChild(card);
     });
 }
+export function updateInscription(id, data) {
+    const inscriptions = getInscription();
+    const index = inscriptions.findIndex((inst) => inst.id === Number(id));
+    if (index === -1) return null;
+    inscriptions[index] = {
+        ...inscriptions[index],
+        prenom : data.prenom.trim(),
+        nom : data.nom.trim(),
+        email : data.email.trim().toLowerCase(),
+        telephone : data.telephone.trim(),
+        adresse : data.adresse.trim(),
+        niveau : data.select_niveau,
+        filiere : data.select_filiere,
+    };
+    saveInscriptions(inscriptions);
+    return inscriptions[index];
+}
+
 
 

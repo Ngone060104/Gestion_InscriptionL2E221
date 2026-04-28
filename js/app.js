@@ -34,12 +34,17 @@ if (domElements.formInscription) {
             showErrors(errors);
             return;
         }
-
-        
+        if (editMode) {
+            updateInscription(currentEditId, formData);
+            showToast('success', 'Mis à jour', `${formData.prenom} a été modifié !`);
+            editMode = false; 
+            currentEditId = null;
+        } else {
             // Sinon, on crée une nouvelle inscription
             createInscription(formData);
             showToast('success', 'Succès', `${formData.prenom} a été inscrit avec succès !`);
-        
+        }
+
 
         // On rafraîchit tout le tableau pour voir les changements
         initApp();
@@ -73,6 +78,43 @@ domElements.BtnOpen.addEventListener('click', () => {
 });
 
 
+let editMode = false;
+let currentEditId = null;
+
+// Dans l'écouteur de clic de ton tbody
+domElements.tableBody.addEventListener('click', (e) => {
+    const editBtn = e.target.closest('.text-green-600'); // Ton bouton vert
+
+    if (editBtn) {
+        console.log("Clic sur modifier détecté !");
+        const tr = editBtn.closest('tr');
+        const id = Number(tr.dataset.id);
+        const inscriptions = getInscription();
+        const student = inscriptions.find(inst => inst.id == id);
+
+        if (student) {
+            // 1. Activer le mode édition
+            editMode = true;
+            currentEditId = id;
+
+
+            // 2. Remplir les champs du formulaire
+            domElements.prenom.value = student.prenom;
+            domElements.nom.value = student.nom;
+            domElements.email.value = student.email;
+            domElements.telephone.value = student.telephone;
+            domElements.adresse.value = student.adresse;
+            domElements.select_niveau.value = student.niveau;
+            domElements.select_filiere.value = student.filiere;
+
+            // 3. Changer le titre de la modale pour l'UX
+            document.querySelector('#modalInscription h3').textContent = "Modifier l'inscription";
+
+            // 4. Ouvrir la modale
+            openModal();
+        }
+    }
+});
 
 
 initApp();
