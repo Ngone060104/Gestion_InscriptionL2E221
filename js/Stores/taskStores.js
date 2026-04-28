@@ -22,12 +22,13 @@ export function initApp() {
 
     // 2. Vérifier si on a un tableau et si on est sur la bonne page
     if (inscriptions.length > 0 && domElements.tableBody) {
+        const visibleInscriptions = inscriptions.filter(inscrit => inscrit.etat === true);
         // Vider le tableau au cas où (pour éviter les doublons)
         domElements.tableBody.innerHTML = '';
 
         // 3. Boucler sur chaque inscription pour l'afficher
-        inscriptions.forEach(student => {
-            const row = addStudentToTable(student);
+        visibleInscriptions.forEach(inscrit => {
+            const row = addStudentToTable(inscrit);
             domElements.tableBody.appendChild(row);
         });
     }
