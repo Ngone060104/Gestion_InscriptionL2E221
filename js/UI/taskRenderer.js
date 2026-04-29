@@ -27,22 +27,49 @@ export function addStudentToTable(student, container) {
 }
 
 
+// js/UI/archiveRenderer.js
 export function renderArchiveCard(student) {
     const div = document.createElement('div');
-    div.className = "p-3 bg-gray-50 rounded-xl border border-gray-100 flex justify-between items-center shadow-sm";
+    div.className = "p-4 bg-white rounded-2xl border border-gray-100 flex items-center gap-4 shadow-sm hover:shadow-md hover:border-pink-200 transition-all group";
+
     div.innerHTML = `
-        <div>
-            <p class="text-sm font-bold text-gray-800">${student.prenom} ${student.nom}</p>
-            <p class="text-[10px] text-gray-500">${student.email} ${student.adresse}</p>
-            <p class="text-[10px] text-gray-500">${student.telephone} ${student.niveau}</p>
-            <p class="text-[10px] text-gray-500">${student.filiere}</p>
+        <!-- Checkbox stylée -->
+        <input type="checkbox" class="archive-check w-5 h-5 rounded-md border-gray-300 text-[#bc1474] focus:ring-[#bc1474] cursor-pointer" data-id="${student.id}">
+        
+        <!-- Infos Étudiant -->
+        <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-1">
+                <p class="text-sm font-bold text-gray-800 truncate">${student.prenom} ${student.nom}</p>
+                <span class="px-2 py-0.5 bg-pink-50 text-[#bc1474] text-[9px] font-bold rounded-full uppercase tracking-wider">
+                    ${student.niveau}
+                </span>
+            </div>
+            
+            <!-- Petite grille d'infos secondaires -->
+            <div class="grid grid-cols-1 gap-y-0.5">
+                <div class="flex items-center text-[10px] text-gray-500 gap-1.5">
+                    <i class="fa-solid fa-envelope w-3 text-gray-300"></i>
+                    <span class="truncate">${student.email}</span>
+                </div>
+                <div class="flex items-center text-[10px] text-gray-500 gap-1.5">
+                    <i class="fa-solid fa-phone w-3 text-gray-300"></i>
+                    <span>${student.telephone}</span>
+                </div>
+                <div class="flex items-center text-[10px] text-gray-400 gap-1.5 italic mt-1">
+                    <i class="fa-solid fa-graduation-cap w-3"></i>
+                    <span class="truncate">${student.filiere}</span>
+                </div>
+            </div>
         </div>
-        <button class="btn-restore text-[#bc1474] hover:bg-pink-100 p-2 rounded-full transition-colors" data-id="${student.id}" title="Restaurer">
-            <i class="fa-solid fa-rotate-left"></i>
+
+        <!-- Action de restauration directe -->
+        <button class="btn-restore-direct w-9 h-9 flex items-center justify-center rounded-xl bg-gray-50 text-gray-400 hover:bg-[#bc1474] hover:text-white transition-all shadow-sm" data-id="${student.id}" title="Restaurer">
+            <i class="fa-solid fa-arrow-rotate-left text-xs"></i>
         </button>
     `;
     return div;
 }
+
 
 
 

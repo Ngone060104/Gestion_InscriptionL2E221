@@ -27,10 +27,13 @@ export function createInscription(data) {
 export function renderArchive() {
     const inscriptions = getInscription();
     // On ne prend que ceux qui sont archivés (status === false)
-    const archivedStudents = inscriptions.filter(inst => inst.status === false);
+    const archivedStudents = inscriptions.filter(inst => inst.etat === false);
 
     // On vide la liste actuelle dans le Drawer
     domElements.archive_list.innerHTML = '';
+        // 3. IMPORTANT : On cache la barre de groupe à chaque rechargement
+    const groupActions = document.getElementById('group_actions');
+    if (groupActions) groupActions.classList.add('hidden');
 
     if (archivedStudents.length === 0) {
         domElements.archive_list.innerHTML = `
@@ -49,6 +52,7 @@ export function renderArchive() {
         domElements.archive_list.appendChild(card);
     });
 }
+
 export function updateInscription(id, data) {
     const inscriptions = getInscription();
     const index = inscriptions.findIndex((inst) => inst.id === Number(id));
@@ -78,4 +82,10 @@ export function getFiltered() {
             .includes(q)
     );
 }
+export function getInscriptionById(id) {
+    return getInscription().find((inst) => inst.id === id) || null;
+}
 
+export function deleteInscription(id) {
+    saveInscriptions(getInscription().filter((inst) => inst.id !== id));
+}

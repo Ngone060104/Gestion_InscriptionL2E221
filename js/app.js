@@ -2,16 +2,16 @@ import * as DOM from './DOM/elements.js';
 import './pages/dashboard.js';
 import './pages/popup.js';
 import { domElements } from './DOM/elements.js';
-import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer } from './UI/modalRenderer.js';
+import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer, openDeleteModal, closeDeleteModal } from './UI/modalRenderer.js';
 import { initNavigation } from './UI/navigationRenderer.js';
-import { createInscription, renderArchive ,updateInscription  ,getFiltered, getInscriptionById} from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
+import { createInscription, renderArchive, updateInscription, getFiltered, getInscriptionById, deleteInscription } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
 import { addStudentToTable } from '../js/UI/taskRenderer.js';
 import { getInscription, saveInscriptions, initApp } from '../js/Stores/taskStores.js';
 import { validateForm, clearErrors, showErrors } from '../js/Utiles/utile.js';
 import { showToast, dismissToast } from './UI/messageRenderer.js';
 
-let selectedIds     = new Set();
-let pendingDeleteId = null;  
+let selectedIds = new Set();
+let pendingDeleteId = null;
 
 
 if (domElements.formInscription) {
@@ -40,7 +40,7 @@ if (domElements.formInscription) {
         if (editMode) {
             updateInscription(currentEditId, formData);
             showToast('success', 'Mis à jour', `${formData.prenom} a été modifié !`);
-            editMode = false; 
+            editMode = false;
             currentEditId = null;
         } else {
             // Sinon, on crée une nouvelle inscription
@@ -66,7 +66,11 @@ if (domElements.annuler) {
 }
 
 
-domElements.restore.addEventListener('click', openArchiveDrawer);
+domElements.restore.addEventListener('click', () => {
+    openArchiveDrawer()
+    renderArchive()
+});
+
 domElements.btnCloseDrawer.addEventListener('click', closeArchiveDrawer);
 domElements.drawerOverlay.addEventListener('click', closeArchiveDrawer);
 
@@ -87,7 +91,6 @@ let currentEditId = null;
 // Dans l'écouteur de clic de ton tbody
 domElements.tableBody.addEventListener('click', (e) => {
     const editBtn = e.target.closest('.text-green-600'); // Ton bouton vert
-
     if (editBtn) {
         console.log("Clic sur modifier détecté !");
         const tr = editBtn.closest('tr');
@@ -121,14 +124,111 @@ domElements.tableBody.addEventListener('click', (e) => {
 
 domElements.search.addEventListener("input", function () {
     console.log("recherche activée");
-    
+
     const inscriptionFiltrés = getFiltered()
-   initApp(inscriptionFiltrés) 
+    initApp(inscriptionFiltrés)
 })
 
 
 
 
+domElements.tableBody.addEventListener('click', (e) => {
+    const deleteBtn = e.target.closest('.text-red-600'); // Ton bouton rouge
+    if (deleteBtn) {
+        const tr = deleteBtn.closest('tr');
+        console.log("Clic sur supprimé détecté !");
+        const id = Number(tr.dataset.id); // On récupère l'ID sur le TR
+        const inscriptions = getInscription()
+        const student = inscriptions.find(inst => inst.id === id);
+
+          if (student) {
+            pendingDeleteId = id;
+            // Correction des noms : prenom et nom au lieu de firstName/lastName
+            domElements.modalDeleteDesc.textContent = `Voulez-vous vraiment Supprimer ${student.prenom} ${student.nom} ? Cette action est irréversible.`;
+            openDeleteModal(); // Utilise la fonction qu'on a créée
+        }
+    }
+
+})
+// 
+domElements.modalDeleteConfirm.addEventListener("click", () => {
+
+    console.log("Action d'archivage lancée...")
+    if (!pendingDeleteId) return;
+    let inscriptions = getInscription()
+    const index = inscriptions.findIndex(inst => inst.id === pendingDeleteId);
+    if (index !== -1){
+        const student = inscriptions[index]
+        const fullName = `{${student.prenom} ${student.nom}`
+        inscriptions[index].etat = false
+        saveInscriptions(inscriptions)
+        closeDeleteModal()
+        initApp()
+        showToast("danger", "Contact supprimé", `${fullName}  a été supprimé avec succès.`);
+    }else {
+        console.error("Erreur : Étudiant non trouvé avec l'ID", pendingDeleteId);
+    }
+
+    pendingDeleteId = null
+});
+
+domElements.modalDeleteCancel.addEventListener("click",() => {
+    closeDeleteModal()
+    pendingDeleteId = null
+
+})
+
+
+// A. Gérer l'affichage de la barre groupée
+domElements.archive_list.addEventListener('change', (e) => {
+    if (e.target.classList.contains('archive-check')) {
+        const checkedBoxes = document.querySelectorAll('.archive-check:checked');
+         const count = checkedBoxes.length;
+        const groupActions = document.getElementById('group_actions');
+        const countSpan = document.getElementById('selected_count');
+        const btnRestoreGroup = document.getElementById('btn_restore_group');
+        
+        if (count >= 3) {
+            groupActions.classList.remove('hidden');
+            countSpan.textContent = `${checkedBoxes.length} sélectionné(s)`;
+            btnRestoreGroup.disabled = false;
+        } else {
+            groupActions.classList.add('hidden');
+        }
+    }
+});
+
+// B. Restauration GROUPÉE
+document.getElementById('btn_restore_group')?.addEventListener('click', () => {
+    const checkedBoxes = document.querySelectorAll('.archive-check:checked');
+    const ids = Array.from(checkedBoxes).map(box => Number(box.dataset.id));
+    
+    processRestoration(ids);
+});
+
+// C. Restauration DIRECTE
+domElements.archive_list.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-restore-direct');
+    if (btn) {
+        processRestoration([Number(btn.dataset.id)]);
+    }
+});
+
+// Fonction commune de restauration
+function processRestoration(ids) {
+    let inscriptions = getInscription();
+    inscriptions.forEach(inst => {
+        if (ids.includes(inst.id)) inst.etat = true;
+    });
+    
+    saveInscriptions(inscriptions);
+    
+    // Refresh
+    renderArchive(); 
+    initApp();
+    document.getElementById('group_actions').classList.add('hidden');
+    showToast('success', 'Restauration réussie', 'Les inscrits sont de retour.');
+}
 
 
 
