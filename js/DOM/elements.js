@@ -31,7 +31,7 @@ export const domElements = {
      modalDeleteDesc : document.getElementById("modalDeleteDesc"),
      modalDeleteCancel : document.getElementById("modalDeleteCancel"),
      modalDeleteConfirm : document.getElementById("modalDeleteConfirm"),
-      modalRestore : document.getElementById("modalRestore"),
+    modalRestore : document.getElementById("modalRestore"),
      modalRestoreDesc : document.getElementById("modalRestoreDesc"),
      modalRestoreCancel : document.getElementById("modalRestoreCancel"),
      modalRestoreConfirm : document.getElementById("modalRestoreConfirm")

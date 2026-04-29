@@ -4,7 +4,7 @@ import './pages/popup.js';
 import { domElements } from './DOM/elements.js';
 import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer, openDeleteModal, closeDeleteModal, openRestoreModal, closeRestoreModal } from './UI/modalRenderer.js';
 import { initNavigation } from './UI/navigationRenderer.js';
-import { createInscription, renderArchive, updateInscription, getFiltered, getInscriptionById, deleteInscription } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
+import { createInscription, renderArchive, updateInscription, getFiltered, getInscriptionById, deleteInscription, updateDashboardStats } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
 import { addStudentToTable } from '../js/UI/taskRenderer.js';
 import { getInscription, saveInscriptions, initApp } from '../js/Stores/taskStores.js';
 import { validateForm, clearErrors, showErrors } from '../js/Utiles/utile.js';
@@ -65,16 +65,20 @@ if (domElements.annuler) {
     })
 }
 
+if (domElements.restore) {
+    domElements.restore.addEventListener('click', () => {
+        openArchiveDrawer()
+        renderArchive()
+    });
+}
+if (domElements.btnCloseDrawer) {
+    domElements.btnCloseDrawer.addEventListener('click', closeArchiveDrawer);
+}
+if (domElements.drawerOverlay) {
+    domElements.drawerOverlay.addEventListener('click', closeArchiveDrawer);
+}
 
-domElements.restore.addEventListener('click', () => {
-    openArchiveDrawer()
-    renderArchive()
-});
-
-domElements.btnCloseDrawer.addEventListener('click', closeArchiveDrawer);
-domElements.drawerOverlay.addEventListener('click', closeArchiveDrawer);
-
-
+if(domElements.BtnOpen) {
 domElements.BtnOpen.addEventListener('click', () => {
     editMode = false;
     currentEditId = null;
@@ -83,12 +87,14 @@ domElements.BtnOpen.addEventListener('click', () => {
     document.querySelector('#modalInscription h3').textContent = "Nouvelle Inscription";
     openModal();
 });
+}
 
 
 let editMode = false;
 let currentEditId = null;
 
 // Dans l'écouteur de clic de ton tbody
+if(domElements.tableBody){
 domElements.tableBody.addEventListener('click', (e) => {
     const editBtn = e.target.closest('.text-green-600'); // Ton bouton vert
     if (editBtn) {
@@ -121,17 +127,19 @@ domElements.tableBody.addEventListener('click', (e) => {
         }
     }
 });
+}
 
+if(domElements.search){
 domElements.search.addEventListener("input", function () {
     console.log("recherche activée");
 
     const inscriptionFiltrés = getFiltered()
     initApp(inscriptionFiltrés)
 })
+}
 
 
-
-
+if(domElements.tableBody){
 domElements.tableBody.addEventListener('click', (e) => {
     const deleteBtn = e.target.closest('.text-red-600'); // Ton bouton rouge
     if (deleteBtn) {
@@ -150,7 +158,9 @@ domElements.tableBody.addEventListener('click', (e) => {
     }
 
 })
+}
 // 
+if(domElements.modalDeleteConfirm){
 domElements.modalDeleteConfirm.addEventListener("click", () => {
 
     console.log("Action d'archivage lancée...")
@@ -172,14 +182,17 @@ domElements.modalDeleteConfirm.addEventListener("click", () => {
     pendingDeleteId = null
 });
 
+}
+if(domElements.modalDeleteCancel){
 domElements.modalDeleteCancel.addEventListener("click", () => {
     closeDeleteModal()
     pendingDeleteId = null
 
 })
-
+}
 
 // A. Gérer l'affichage de la barre groupée
+if(domElements.archive_list){
 domElements.archive_list.addEventListener('change', (e) => {
     if (e.target.classList.contains('archive-check')) {
         const checkedBoxes = document.querySelectorAll('.archive-check:checked');
@@ -197,7 +210,7 @@ domElements.archive_list.addEventListener('change', (e) => {
         }
     }
 });
-
+}
 // B. Restauration GROUPÉE
 document.getElementById('btn_restore_group')?.addEventListener('click', () => {
     const checkedBoxes = document.querySelectorAll('.archive-check:checked');
@@ -207,6 +220,7 @@ document.getElementById('btn_restore_group')?.addEventListener('click', () => {
         openRestoreModal()
     }
 });
+if(document.getElementById("modalRestoreConfirm")){
 document.getElementById("modalRestoreConfirm").addEventListener("click", () => {
     if (pendingRestoreId) {
         processRestoration(pendingRestoreId);
@@ -214,20 +228,26 @@ document.getElementById("modalRestoreConfirm").addEventListener("click", () => {
     closeRestoreModal()
     pendingRestoreId = null
 })
+}
 
+if(document.getElementById("modalRestoreCancel")){
 document.getElementById("modalRestoreCancel").addEventListener("click", () => {
     closeRestoreModal()
 })
+}
+
 // C. Restauration DIRECTE
+if(domElements.archive_list){
 domElements.archive_list.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-restore-direct');
     if (btn) {
         const idAExtraire = Number(btn.dataset.id)
         pendingRestoreId = [idAExtraire]
-            document.getElementById('modalRestoreDesc').textContent = "Voulez-vous remettre cet étudiant dans la liste principale ?";
+        document.getElementById('modalRestoreDesc').textContent = "Voulez-vous remettre cet étudiant dans la liste principale ?";
         openRestoreModal()
     }
 });
+}
 
 // Fonction commune de restauration
 function processRestoration(ids) {
@@ -251,3 +271,7 @@ function processRestoration(ids) {
 
 
 initApp();
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateDashboardStats();
+});
