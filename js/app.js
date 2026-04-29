@@ -2,7 +2,7 @@ import * as DOM from './DOM/elements.js';
 import './pages/dashboard.js';
 import './pages/popup.js';
 import { domElements } from './DOM/elements.js';
-import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer, openDeleteModal, closeDeleteModal } from './UI/modalRenderer.js';
+import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer, openDeleteModal, closeDeleteModal, openRestoreModal, closeRestoreModal } from './UI/modalRenderer.js';
 import { initNavigation } from './UI/navigationRenderer.js';
 import { createInscription, renderArchive, updateInscription, getFiltered, getInscriptionById, deleteInscription } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
 import { addStudentToTable } from '../js/UI/taskRenderer.js';
@@ -12,7 +12,7 @@ import { showToast, dismissToast } from './UI/messageRenderer.js';
 
 let selectedIds = new Set();
 let pendingDeleteId = null;
-
+let pendingRestoreId = null
 
 if (domElements.formInscription) {
     domElements.formInscription.addEventListener('submit', (e) => {
@@ -141,7 +141,7 @@ domElements.tableBody.addEventListener('click', (e) => {
         const inscriptions = getInscription()
         const student = inscriptions.find(inst => inst.id === id);
 
-          if (student) {
+        if (student) {
             pendingDeleteId = id;
             // Correction des noms : prenom et nom au lieu de firstName/lastName
             domElements.modalDeleteDesc.textContent = `Voulez-vous vraiment Supprimer ${student.prenom} ${student.nom} ? Cette action est irréversible.`;
@@ -157,7 +157,7 @@ domElements.modalDeleteConfirm.addEventListener("click", () => {
     if (!pendingDeleteId) return;
     let inscriptions = getInscription()
     const index = inscriptions.findIndex(inst => inst.id === pendingDeleteId);
-    if (index !== -1){
+    if (index !== -1) {
         const student = inscriptions[index]
         const fullName = `{${student.prenom} ${student.nom}`
         inscriptions[index].etat = false
@@ -165,14 +165,14 @@ domElements.modalDeleteConfirm.addEventListener("click", () => {
         closeDeleteModal()
         initApp()
         showToast("danger", "Contact supprimé", `${fullName}  a été supprimé avec succès.`);
-    }else {
+    } else {
         console.error("Erreur : Étudiant non trouvé avec l'ID", pendingDeleteId);
     }
 
     pendingDeleteId = null
 });
 
-domElements.modalDeleteCancel.addEventListener("click",() => {
+domElements.modalDeleteCancel.addEventListener("click", () => {
     closeDeleteModal()
     pendingDeleteId = null
 
@@ -183,11 +183,11 @@ domElements.modalDeleteCancel.addEventListener("click",() => {
 domElements.archive_list.addEventListener('change', (e) => {
     if (e.target.classList.contains('archive-check')) {
         const checkedBoxes = document.querySelectorAll('.archive-check:checked');
-         const count = checkedBoxes.length;
+        const count = checkedBoxes.length;
         const groupActions = document.getElementById('group_actions');
         const countSpan = document.getElementById('selected_count');
         const btnRestoreGroup = document.getElementById('btn_restore_group');
-        
+
         if (count >= 3) {
             groupActions.classList.remove('hidden');
             countSpan.textContent = `${checkedBoxes.length} sélectionné(s)`;
@@ -201,16 +201,31 @@ domElements.archive_list.addEventListener('change', (e) => {
 // B. Restauration GROUPÉE
 document.getElementById('btn_restore_group')?.addEventListener('click', () => {
     const checkedBoxes = document.querySelectorAll('.archive-check:checked');
-    const ids = Array.from(checkedBoxes).map(box => Number(box.dataset.id));
-    
-    processRestoration(ids);
+    pendingRestoreId = Array.from(checkedBoxes).map(box => Number(box.dataset.id));
+    if (pendingRestoreId.length > 0) {
+        document.getElementById('modalRestoreDesc').textContent = `Voulez-vous restaurer les ${pendingRestoreId.length} inscrits sélectionnés ?`
+        openRestoreModal()
+    }
 });
+document.getElementById("modalRestoreConfirm").addEventListener("click", () => {
+    if (pendingRestoreId) {
+        processRestoration(pendingRestoreId);
+    }
+    closeRestoreModal()
+    pendingRestoreId = null
+})
 
+document.getElementById("modalRestoreCancel").addEventListener("click", () => {
+    closeRestoreModal()
+})
 // C. Restauration DIRECTE
 domElements.archive_list.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-restore-direct');
     if (btn) {
-        processRestoration([Number(btn.dataset.id)]);
+        const idAExtraire = Number(btn.dataset.id)
+        pendingRestoreId = [idAExtraire]
+            document.getElementById('modalRestoreDesc').textContent = "Voulez-vous remettre cet étudiant dans la liste principale ?";
+        openRestoreModal()
     }
 });
 
@@ -220,11 +235,11 @@ function processRestoration(ids) {
     inscriptions.forEach(inst => {
         if (ids.includes(inst.id)) inst.etat = true;
     });
-    
+
     saveInscriptions(inscriptions);
-    
+
     // Refresh
-    renderArchive(); 
+    renderArchive();
     initApp();
     document.getElementById('group_actions').classList.add('hidden');
     showToast('success', 'Restauration réussie', 'Les inscrits sont de retour.');

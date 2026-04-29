@@ -13,6 +13,7 @@ export function addStudentToTable(student, container) {
         <td class="px-6 py-4 text-sm text-gray-600 font-medium text-left  ">${student.email}</td>
         <td class="px-6 py-4 text-sm text-gray-600 font-medium text-left ">${student.adresse}</td>
         <td class="px-6 py-4 text-sm font-mono text-gray-600 font-medium text-left  ">${student.telephone}</td>
+         <td class="px-6 py-4">${student.date || 'Non définie'}</td> 
        <td class="px-6 py-4 text-sm text-gray-600 font-medium text-left "> ${student.niveau} ${student.filiere}</td>
         <td class="px-6 py-4">
             <div class="flex justify-center gap-3">

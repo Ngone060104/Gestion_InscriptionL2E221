@@ -60,7 +60,21 @@ export function closeDeleteModal() {
     modalBox.classList.remove('scale-100');
 }
 
+export function openRestoreModal() {
+    const modal = document.getElementById('modalRestore');
+    const modalBox = modal.firstElementChild;
 
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modalBox.classList.remove('scale-95');
+}
+
+export function closeRestoreModal() {
+    const modal = document.getElementById('modalRestore');
+    const modalBox = modal.firstElementChild;
+
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    modalBox.classList.remove('scale-95');
+}
 
 
 
