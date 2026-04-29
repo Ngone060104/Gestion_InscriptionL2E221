@@ -17,8 +17,8 @@ export function saveInscriptions(inscriptions) {
 }
 
 
-export function initApp() {
-    const inscriptions = getInscription(); 
+export function initApp( data = null ) {
+    const inscriptions = data || getInscription(); 
 
     // 2. Vérifier si on a un tableau et si on est sur la bonne page
     if (inscriptions.length > 0 && domElements.tableBody) {

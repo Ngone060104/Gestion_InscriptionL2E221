@@ -16,7 +16,41 @@
     <!-- toast -->
     <div class="toast-container fixed top-5 right-5 z-[100] flex flex-col gap-3" id="toastContainer"></div>
     <!-- modal -->
-    
+    <!-- Modal Overlay -->
+    <div id="modalDelete"
+        class="fixed inset-0 bg-[#1a0508]/45 backdrop-blur-[4px] z-[8000] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-[220ms] ease-linear">
+
+        <!-- Modal Box -->
+        <div
+            class="bg-white rounded-[14px] px-8 pt-9 pb-7 w-[380px] max-w-[90vw] text-center shadow-2xl transform scale-[0.94] transition-transform duration-[220ms] [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)]">
+
+            <!-- Icone Danger -->
+            <div
+                class="w-[52px] h-[52px] rounded-full bg-red-50 text-red-600 border-2 border-red-900/15 flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                ✕
+            </div>
+
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Archiver ce contact ?</h3>
+
+            <p id="modalDeleteDesc" class="text-[13px] text-gray-500 leading-relaxed mb-7">
+                Cette action déplacera le contact dans les archives.
+            </p>
+
+            <!-- Actions -->
+            <div class="flex gap-2.5">
+                <button id="modalDeleteCancel"
+                    class="flex-1 py-2.5 rounded-lg border border-gray-200 text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+                    Annuler
+                </button>
+                <button id="modalDeleteConfirm"
+                    class="flex-1 py-2.5 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition-colors shadow-sm">
+                    Archiver
+                </button>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Sidebar -->
     <aside id="sidebar"
         class="fixed inset-y-0 left-0 z-50 w-64 bg-[#b52a70] text-white transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 ease-in-out flex flex-col">
@@ -100,7 +134,7 @@
                 <div class="flex items-center w-full lg:w-auto gap-4">
                     <span class="font-bold text-gray-700">Filtres</span>
                     <div class="relative flex-1">
-                        <input type="text" placeholder="Recherche par Nom..."
+                        <input type="text" placeholder="Recherche par Nom..." id="search"
                             class="w-full border border-purple-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-purple-400 outline-none">
                         <span class="absolute right-3 top-2.5 text-purple-400"><i class="fas fa-search"></i></span>
                     </div>
@@ -124,16 +158,22 @@
 
 
 
-            <section class="bg-pink-100 rounded-2xl shadow-sm border border-gray-100 overflow-hidden px-5 py-2 ">
+            <section class="bg-pink-100 rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <!-- En-tête du tableau -->
                 <div class="p-5 font-bold text-lg">
                     Liste inscriptions
                 </div>
 
                 <!-- Conteneur avec scroll horizontal si nécessaire -->
+<<<<<<< HEAD
                 <div class="overflow-x-auto">
                     <table class="w-full border-collapse">
                         <thead class="bg-[#bc1474] text-white/90 uppercase text-xs">
+=======
+                <div class="overflow-x-auto  px-5 py-2 ">
+                    <table class="w-full border-collapse table-fixed min-w-[800px]">
+                        <thead class="bg-[#bc1474] text-white/90 uppercase text-xs text-center">
+>>>>>>> 901475dee334a0181ccab1cabfb39695e791f30d
                             <tr>
 
                                 <th class="px-6 py-4 text-left font-bold tracking-wider">Prénom</th>
@@ -145,7 +185,7 @@
                                 <th class="px-6 py-4 text-center font-bold tracking-wider">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100 bg-white">
+                        <tbody class="divide-y divide-gray-100 bg-white" id="listesInscriptions">
 
                             <!-- Ajoute tes autres lignes ici -->
                         </tbody>

@@ -25,7 +25,13 @@ export const domElements = {
     archive_list : document.getElementById("archive_list"),
     restore : document.getElementById("restore"),
      btnCloseDrawer: document.getElementById('close_drawer'),
-     drawerOverlay: document.getElementById('drawer_overlay')
+     drawerOverlay: document.getElementById('drawer_overlay'),
+     search : document.getElementById("search"),
+     modalDelete : document.getElementById("modalDelete"),
+     modalDeleteDesc : document.getElementById("modalDeleteDesc"),
+     modalDeleteCancel : document.getElementById("modalDeleteCancel"),
+     modalDeleteConfirm : document.getElementById("modalDeleteConfirm")
+
     // le conteneur des cartes 
 };
 
