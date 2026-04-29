@@ -6,6 +6,7 @@
 const STORAGE_KEY   = "inscriptions";
 import { domElements } from '../DOM/elements.js';
 import { addStudentToTable } from '../UI/taskRenderer.js';
+import { updateDashboardStats } from '../Services/inscriptionServices.js';
 
 export function getInscription() {
     const data = localStorage.getItem(STORAGE_KEY);
@@ -32,6 +33,7 @@ export function initApp( data = null ) {
             domElements.tableBody.appendChild(row);
         });
     }
+    updateDashboardStats()
 }
 
 

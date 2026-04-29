@@ -23,9 +23,15 @@
                 <i class="fa-solid fa-xmark text-2xl"></i>
             </button>
 
-            <div class="p-6 text- font-bold border-b border-pink-400/30">
-                Gestion Inscription
-            </div>
+         <div class="p-6 border-b border-pink-400/30 flex items-center gap-3">
+    <div class="bg-white/20 p-2 rounded-lg">
+        <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+    </div>
+    <div class="leading-tight">
+        <h1 class="font-bold text-sm">Gestion Inscription <span class="text-pink-200">E221</span></h1>
+    </div>
+</div>
+
             <nav class="flex-1 mt-6 p-4 space-y-2">
                 <a href="./dashboard.html" class="flex items-center p-3 bg-white/10 rounded-lg text-sm"><i
                         class="fa-solid fa-table-cells-large mr-3"></i><span class="mr-3"></span> Dashboard</a>
@@ -99,7 +105,7 @@
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-yellow-400 flex justify-between items-center">
                         <div>
                             <p class="text-gray-500 text-sm">Étudiants Inscrits</p>
-                            <p class="text-4xl font-bold text-gray-800">128</p>
+                            <p id="stat_total_inscrits" class="text-4xl font-bold text-gray-800">0</p>
                         </div>
                         <div class="bg-orange-100 p-3 rounded-lg text-orange-500 text-2xl"><i
                                 class="fa-solid fa-user-group text-orange-400 text-2xl"></i>
@@ -108,8 +114,8 @@
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-purple-600 flex justify-between items-center">
                         <div>
-                            <p class="text-gray-500 text-sm">Formations Actives</p>
-                            <p class="text-4xl font-bold text-gray-800">12</p>
+                            <p class="text-gray-500 text-sm">Inscriptions du Jour</p>
+                            <p id="stat_inscriptions_jour" class="text-4xl font-bold text-gray-800">0</p>
                         </div>
                         <div class="bg-purple-400 p-3 rounded-lg text-purple-600 text-2xl"><i
                                 class="fa-solid fa-book-open text-white text-2xl"></i></div>
@@ -117,8 +123,8 @@
                     <div
                         class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-[#b52a70] flex justify-between items-center">
                         <div>
-                            <p class="text-gray-500 text-sm">Inscriptions Supprimées</p>
-                            <p class="text-4xl font-bold text-gray-800">45</p>
+                            <p class="text-gray-500 text-sm">Inscriptions Archivées</p>
+                            <p id = "stat_total_archives" class="text-4xl font-bold text-gray-800">0</p>
                         </div>
                         <div class="bg-pink-400 p-3 rounded-lg text-pink-600 text-2xl"><i
                                 class="fa-solid fa-file-invoice text-white text-2xl"></i>

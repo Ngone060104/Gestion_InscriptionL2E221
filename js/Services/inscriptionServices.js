@@ -89,3 +89,29 @@ export function getInscriptionById(id) {
 export function deleteInscription(id) {
     saveInscriptions(getInscription().filter((inst) => inst.id !== id));
 }
+
+
+export function updateDashboardStats () {
+    const inscriptions = getInscription(); // Récupère tout depuis le localStorage
+   const aujourdhui = new Date().toLocaleDateString("fr-FR", {
+        day: "2-digit", month: "short", year: "numeric"
+    });
+
+    // 1. Calculer le total des inscrits (etat === true)
+    const totalActifs = inscriptions.filter(inst => inst.etat === true).length;
+
+    // 2. Calculer les inscriptions faites AUJOURD'HUI
+    const inscritsJour = inscriptions.filter(inst => inst.date === aujourdhui && inst.etat === true).length;
+
+    // 3. Calculer le total des archivés (etat === false)
+    const totalArchives = inscriptions.filter(inst => inst.etat === false).length;
+
+    // Injection dans le HTML (Sécurisé avec des vérifications d'éléments)
+    const elInscrits = document.getElementById('stat_total_inscrits');
+    const elJour = document.getElementById('stat_inscriptions_jour');
+    const elArchives = document.getElementById('stat_total_archives');
+
+    if (elInscrits) elInscrits.textContent = totalActifs;
+    if (elJour) elJour.textContent = inscritsJour;
+    if (elArchives) elArchives.textContent = totalArchives;
+};

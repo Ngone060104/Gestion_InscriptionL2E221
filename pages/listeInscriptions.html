@@ -82,9 +82,15 @@
         <button class="lg:hidden absolute top-4 right-4 text-white/80 hover:text-white btn-close">
             <i class="fa-solid fa-xmark text-2xl"></i>
         </button>
-        <div class="p-6 text-lg font-bold border-b border-pink-400/30 tracking-tight">
-            Gestion Inscription <span class="text-pink-200">E221</span>
+        <div class="p-6 border-b border-pink-400/30 flex items-center gap-3">
+            <div class="bg-white/20 p-2 rounded-lg">
+                <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+            </div>
+            <div class="leading-tight">
+                <h1 class="font-bold text-sm">Gestion Inscription <span class="text-pink-200">E221</span></h1>
+            </div>
         </div>
+
         <nav class="flex-1 mt-6 p-4 space-y-2">
             <a href="./dashboard.html" class="flex items-center p-3 bg-white/10 rounded-lg text-sm"><i
                     class="fa-solid fa-table-cells-large mr-3"></i><span class="mr-3"></span> Dashboard</a>
@@ -149,9 +155,7 @@
                     Admin Dashbord --> Liste des inscriptions
                 </h1>
             </section>
-            <!-- filtre -->
-            <!-- <section class="bg-pink-100 p-6 rounded-xl border-l-8 border-pink-500"> -->
-            <!-- Section Filtres Adaptative -->
+          
             <div class="bg-white p-4 rounded-lg shadow-sm mb-6 flex flex-col lg:flex-row items-center gap-4">
 
                 <!-- Titre et Recherche -->
@@ -163,7 +167,7 @@
                                 class="fa-solid fa-magnifying-glass text-pink-200 text-xs transition-colors group-focus-within:text-white"></i>
                         </div>
                         <input type="text" id="search" placeholder="Rechercher un étudiant..."
-                            class="w-full bg-[#b52a70]/90 border border-pink-400/20 text-white placeholder-pink-200 pl-10 pr-4 py-2 rounded-xl outline-none text-sm transition-all focus:bg-[#b52a70] focus:ring-2 focus:ring-pink-300/50 shadow-inner">
+                            class="w-full bg-white border-2 border-pink-400/20 text-pink-900 placeholder-pink-200 pl-10 pr-4 py-2 rounded-xl outline-none text-sm transition-all focus:bg-pink-100 focus:ring-2 focus:ring-pink-300/50 shadow-inner">
                     </div>
 
                 </div>
