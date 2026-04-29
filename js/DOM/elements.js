@@ -30,7 +30,9 @@ export const domElements = {
      modalDelete : document.getElementById("modalDelete"),
      modalDeleteDesc : document.getElementById("modalDeleteDesc"),
      modalDeleteCancel : document.getElementById("modalDeleteCancel"),
-     modalDeleteConfirm : document.getElementById("modalDeleteConfirm")
+     modalDeleteConfirm : document.getElementById("modalDeleteConfirm"),
+    
+
 
     // le conteneur des cartes 
 };
