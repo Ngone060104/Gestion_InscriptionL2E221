@@ -4,11 +4,14 @@ import './pages/popup.js';
 import { domElements } from './DOM/elements.js';
 import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer } from './UI/modalRenderer.js';
 import { initNavigation } from './UI/navigationRenderer.js';
-import { createInscription, renderArchive ,updateInscription  ,getFiltered} from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
+import { createInscription, renderArchive ,updateInscription  ,getFiltered, getInscriptionById} from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
 import { addStudentToTable } from '../js/UI/taskRenderer.js';
 import { getInscription, saveInscriptions, initApp } from '../js/Stores/taskStores.js';
 import { validateForm, clearErrors, showErrors } from '../js/Utiles/utile.js';
 import { showToast, dismissToast } from './UI/messageRenderer.js';
+
+let selectedIds     = new Set();
+let pendingDeleteId = null;  
 
 
 if (domElements.formInscription) {
@@ -122,4 +125,14 @@ domElements.search.addEventListener("input", function () {
     const inscriptionFiltrés = getFiltered()
    initApp(inscriptionFiltrés) 
 })
+
+
+
+
+
+
+
+
+
+
 initApp();
