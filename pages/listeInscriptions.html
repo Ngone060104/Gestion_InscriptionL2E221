@@ -16,7 +16,7 @@
     <!-- toast -->
     <div class="toast-container fixed top-5 right-5 z-[100] flex flex-col gap-3" id="toastContainer"></div>
 
-    <!-- Modal Overlay -->
+    <!-- Modal Overlay Suppresssion-->
     <div id="modalDelete"
         class="fixed inset-0 bg-[#1a0508]/45 backdrop-blur-[4px] z-[8000] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-[220ms] ease-linear">
         <div
@@ -44,6 +44,36 @@
         </div>
     </div>
 
+    <!-- Modal de Restauration -->
+    <div id="modalRestore"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[9000] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <div
+            class="bg-white rounded-2xl p-6 w-[400px] max-w-[95vw] shadow-xl border border-slate-100 transform scale-95 transition-transform duration-300">
+            <div class="flex flex-col items-center text-center">
+                <div
+                    class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4 ring-8 ring-blue-50/50">
+                    <i class="fa-solid fa-arrow-rotate-left text-blue-600 text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 tracking-tight">Restaurer l'inscription ?</h3>
+                <p id="modalRestoreDesc" class="mt-3 text-sm text-slate-500 leading-relaxed">
+                    Voulez-vous remettre ce contact dans la liste principale ?
+                </p>
+            </div>
+            <div class="my-6 border-t border-slate-100"></div>
+            <div class="flex gap-3">
+                <button id="modalRestoreCancel"
+                    class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-50 transition-all">
+                    Annuler
+                </button>
+                <button id="modalRestoreConfirm"
+                    class="flex-1 px-4 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 shadow-md shadow-blue-200 transition-all">
+                    Oui, restaurer
+                </button>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Sidebar -->
     <aside id="sidebar"
@@ -52,8 +82,8 @@
         <button class="lg:hidden absolute top-4 right-4 text-white/80 hover:text-white btn-close">
             <i class="fa-solid fa-xmark text-2xl"></i>
         </button>
-        <div class="p-6 text- font-bold border-b border-pink-400/30">
-            Gestion Inscription
+        <div class="p-6 text-lg font-bold border-b border-pink-400/30 tracking-tight">
+            Gestion Inscription <span class="text-pink-200">E221</span>
         </div>
         <nav class="flex-1 mt-6 p-4 space-y-2">
             <a href="./dashboard.html" class="flex items-center p-3 bg-white/10 rounded-lg text-sm"><i
@@ -127,11 +157,15 @@
                 <!-- Titre et Recherche -->
                 <div class="flex items-center w-full lg:w-auto gap-4">
                     <span class="font-bold text-gray-700">Filtres</span>
-                    <div class="relative flex-1">
-                        <input type="text" placeholder="Recherche par Nom..." id="search"
-                            class="w-full border border-purple-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-purple-400 outline-none">
-                        <span class="absolute right-3 top-2.5 text-purple-400"><i class="fas fa-search"></i></span>
+                    <div class="flex-1 max-w-md mx-2 sm:mx-8 relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i
+                                class="fa-solid fa-magnifying-glass text-pink-200 text-xs transition-colors group-focus-within:text-white"></i>
+                        </div>
+                        <input type="text" id="search" placeholder="Rechercher un étudiant..."
+                            class="w-full bg-[#b52a70]/90 border border-pink-400/20 text-white placeholder-pink-200 pl-10 pr-4 py-2 rounded-xl outline-none text-sm transition-all focus:bg-[#b52a70] focus:ring-2 focus:ring-pink-300/50 shadow-inner">
                     </div>
+
                 </div>
 
                 <!-- Boutons d'action (s'étirent sur mobile) -->
