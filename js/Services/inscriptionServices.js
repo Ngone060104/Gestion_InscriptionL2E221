@@ -67,5 +67,15 @@ export function updateInscription(id, data) {
     return inscriptions[index];
 }
 
+export function getFiltered() {
+    const listesInscriptions = getInscription()
+    const q = domElements.search.value.toLowerCase().trim(); 
+    if (!q) return listesInscriptions; 
 
+    return listesInscriptions.filter((inst) =>
+        `${inst.nom} ${inst.prenom} ${inst.adresse} ${inst.email} ${inst.telephone} ${inst.niveau} ${inst.filiere}`
+            .toLowerCase()
+            .includes(q)
+    );
+}
 

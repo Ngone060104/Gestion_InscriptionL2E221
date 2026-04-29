@@ -36,6 +36,31 @@ export function closeArchiveDrawer() {
     setTimeout(() => drawerOverlay.classList.add('hidden'), 300);
 }
 
+// Fonction pour ouvrir le modal
+export function openDeleteModal() {
+    const overlay = document.getElementById('modalDelete');
+    const modalBox = overlay.firstElementChild;
+
+    overlay.classList.remove('opacity-0', 'pointer-events-none');
+    overlay.classList.add('opacity-100', 'pointer-events-all');
+    
+    modalBox.classList.remove('scale-[0.94]');
+    modalBox.classList.add('scale-100');
+}
+
+// Fonction pour fermer le modal
+export function closeDeleteModal() {
+    const overlay = document.getElementById('modalDelete');
+    const modalBox = overlay.firstElementChild;
+
+    overlay.classList.add('opacity-0', 'pointer-events-none');
+    overlay.classList.remove('opacity-100', 'pointer-events-all');
+    
+    modalBox.classList.add('scale-[0.94]');
+    modalBox.classList.remove('scale-100');
+}
+
+
 
 
 
