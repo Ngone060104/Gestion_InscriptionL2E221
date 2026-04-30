@@ -4,8 +4,8 @@ import './pages/popup.js';
 import { domElements } from './DOM/elements.js';
 import { openModal, closeModal, openArchiveDrawer, closeArchiveDrawer, openDeleteModal, closeDeleteModal, openRestoreModal, closeRestoreModal } from './UI/modalRenderer.js';
 import { initNavigation } from './UI/navigationRenderer.js';
-import { createInscription, renderArchive, updateInscription, getFiltered, getInscriptionById, deleteInscription, updateDashboardStats } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
-import { addStudentToTable } from '../js/UI/taskRenderer.js';
+import { createInscription, renderArchive, updateInscription, getFiltered, getInscriptionById, deleteInscription, updateDashboardStats , updateCharts } from '../js/Services/inscriptionServices.js'; // ou ton chemin vers createInscription
+import { addStudentToTable } from '../js/UI/taskRenderer.js'; 
 import { getInscription, saveInscriptions, initApp } from '../js/Stores/taskStores.js';
 import { validateForm, clearErrors, showErrors } from '../js/Utiles/utile.js';
 import { showToast, dismissToast } from './UI/messageRenderer.js';
@@ -274,4 +274,5 @@ initApp();
 
 document.addEventListener('DOMContentLoaded', () => {
     updateDashboardStats();
+    updateCharts()
 });

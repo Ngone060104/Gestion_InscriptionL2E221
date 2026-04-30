@@ -139,12 +139,12 @@
                         <h3 class="font-bold text-gray-700 mb-4">Statistiques des inscriptions</h3>
                         <p class="text-orange-500 text-xs font-bold uppercase mb-6">Évolution mensuelle</p>
                         <div class="flex items-end justify-between h-48 px-4">
-                            <div class="w-12 bg-gray-300 rounded-t-lg h-[40%]"></div>
-                            <div class="w-12 bg-purple-400 rounded-t-lg h-[70%]"></div>
-                            <div class="w-12 bg-orange-200 rounded-t-lg h-[50%]"></div>
-                            <div class="w-12 bg-green-400 rounded-t-lg h-[90%]"></div>
-                            <div class="w-12 bg-orange-500 rounded-t-lg h-[65%]"></div>
-                            <div class="w-12 bg-red-300 rounded-t-lg h-[30%]"></div>
+                            <div id="bar-jan" class="w-12 bg-gray-300 rounded-t-lg h-[40%]"></div>
+                            <div id="bar-feb" class="w-12 bg-purple-400 rounded-t-lg h-[70%]"></div>
+                            <div id="bar-mar" class="w-12 bg-orange-200 rounded-t-lg h-[50%]"></div>
+                            <div id="bar-apr" class="w-12 bg-green-400 rounded-t-lg h-[90%]"></div>
+                            <div id="bar-may" class="w-12 bg-orange-500 rounded-t-lg h-[65%]"></div>
+                            <div id="bar-jun" class="w-12 bg-red-300 rounded-t-lg h-[30%]"></div>
                         </div>
                         <div class="flex justify-between mt-2 text-xs text-gray-400 px-4">
                             <span>Janv</span><span>Fév</span><span>Mars</span><span>Avril</span><span>Mai</span><span>Juin</span>
@@ -154,14 +154,14 @@
                     <!-- Donut Chart Placeholder -->
                     <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col justify-center">
                         <div class="flex items-center gap-4">
-                            <div
+                            <div id="donut_circle" 
                                 class="w-24 h-24 rounded-full border-[12px] border-pink-400 border-l-blue-400 border-t-purple-400">
                             </div>
-                            <ul class="text-[10px] space-y-2 flex-1">
-                                <li class="flex justify-between"><span>• Development Web</span> <b>52.1%</b></li>
-                                <li class="flex justify-between"><span>• UI/UX</span> <b>22.8%</b></li>
-                                <li class="flex justify-between"><span>• Marketing</span> <b>13.9%</b></li>
-                                <li class="flex justify-between"><span>• CyberSecurity</span> <b>11.2%</b></li>
+                            <ul id = "stats_filiere_list" class="text-[10px] space-y-2 flex-1">
+                                <li class="flex justify-between"><span>• </span> <b> </b></li>
+                                <li class="flex justify-between"><span>• /span> <b> </b></li>
+                                <li class="flex justify-between"><span>• </span> <b> </b></li>
+                                <li class="flex justify-between"><span>• </span> <b> </b></li>
                             </ul>
                         </div>
                     </div>

@@ -115,3 +115,45 @@ export function updateDashboardStats () {
     if (elJour) elJour.textContent = inscritsJour;
     if (elArchives) elArchives.textContent = totalArchives;
 };
+
+
+export function updateCharts() {
+    const inscriptions = getInscription().filter(inst => inst.etat === true);
+    if (inscriptions.length === 0) return;
+
+    // --- 1. GRAPHIQUE EN BARRES (Évolution mensuelle) ---
+    const mappingMois = { "janv": "bar-jan", "fév": "bar-feb", "mars": "bar-mar", "avr": "bar-apr", "mai": "bar-may", "juin": "bar-jun" };
+    const statsMois = {};
+
+    inscriptions.forEach(inst => {
+        // On extrait le mois de ta date "30 avr. 2026"
+        const mois = inst.date.split(' ')[1].toLowerCase().replace('.', '');
+        if (mappingMois[mois]) {
+            statsMois[mois] = (statsMois[mois] || 0) + 1;
+        }
+    });
+
+    const maxVal = Math.max(...Object.values(statsMois), 1);
+    Object.keys(mappingMois).forEach(m => {
+        const el = document.getElementById(mappingMois[m]);
+        if (el) {
+            const hauteur = ((statsMois[m] || 0) / maxVal) * 100;
+            el.style.height = `${hauteur}%`;
+        }
+    });
+
+    // --- 2. LÉGENDE DES FILIÈRES ---
+    const repartition = inscriptions.reduce((acc, inst) => {
+        const f = inst.filiere || "Autre";
+        acc[f] = (acc[f] || 0) + 1;
+        return acc;
+    }, {});
+
+    const listContainer = document.getElementById('stats_filiere_list');
+    if (listContainer) {
+        listContainer.innerHTML = Object.entries(repartition).map(([name, count]) => {
+            const percent = ((count / inscriptions.length) * 100).toFixed(1);
+            return `<li class="flex justify-between"><span>• ${name}</span> <b>${percent}%</b></li>`;
+        }).join('');
+    }
+}
