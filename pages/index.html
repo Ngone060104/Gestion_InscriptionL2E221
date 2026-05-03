@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+    <div class="flex h-screen bg-white font-sans">
+
+        <!-- Sidebar -->
+        <aside id="sidebar"
+            class="fixed inset-y-0 left-0 z-50 w-64 bg-[#b52a70] text-white transform -translate-x-full lg:translate-x-0 lg:static lg:inset-0 transition-transform duration-300 ease-in-out flex flex-col">
+            <!-- Bouton Fermer (Visible uniquement sur mobile) -->
+            <button class="lg:hidden absolute top-4 right-4 text-white/80 hover:text-white btn-close">
+                <i class="fa-solid fa-xmark text-2xl"></i>
+            </button>
+
+         <div class="p-6 border-b border-pink-400/30 flex items-center gap-3">
+    <div class="bg-white/20 p-2 rounded-lg">
+        <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+    </div>
+    <div class="leading-tight">
+        <h1 class="font-bold text-sm">Gestion Inscription <span class="text-pink-200">E221</span></h1>
+    </div>
+</div>
+
+            <nav class="flex-1 mt-6 p-4 space-y-2">
+                <a href="./dashboard.html" class="flex items-center p-3 bg-white/10 rounded-lg text-sm"><i
+                        class="fa-solid fa-table-cells-large mr-3"></i><span class="mr-3"></span> Dashboard</a>
+                <a href="./listeInscriptions.html" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                        class="fa-solid fa-users mr-3"></i><span class="mr-3"></span> Listes Étudiants</a>
+                <!-- <a href="#" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                        class="fa-solid fa-book mr-3"></i><span class="mr-3"></span> Listes Formations</a>
+                <a href="#" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                        class="fa-solid fa-envelopes-bulk mr-3"></i><span class="mr-3"></span> Listes Demandes</a>
+                <a href="#" class="flex items-center p-3 hover:bg-white/5 rounded-lg text-sm"><i
+                        class="fa-solid fa-pen-to-square mr-3"></i><span class="mr-3"></span> Listes Inscriptions</a> -->
+            </nav>
+        </aside>
+        <!-- 1. L'overlay (fond sombre) -->
+        <div id="overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden"></div>
+
+
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-hidden">
+
+            <!-- Top Navbar -->
+            <!-- Top Navbar Optimisée -->
+            <header class="bg-white m-4 rounded-xl shadow-sm p-4 flex justify-between items-center gap-2">
+                <!-- Titre et Menu -->
+                <div class="flex items-center min-w-max">
+                    <button class="lg:hidden text-gray-600 mr-2 btn-menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <h2 class="font-bold text-gray-700 text-sm md:text-base hidden sm:block">Admin Dashbrd</h2>
+                </div>
+
+                <!-- Barre de recherche flexible -->
+                <div class="flex-1 max-w-md mx-2 sm:mx-8">
+                    <input type="text" placeholder="Recherche..."
+                        class="w-full bg-[#b52a70] text-white placeholder-pink-200 px-4 py-1.5 rounded-full outline-none text-center text-xs sm:text-sm">
+                </div>
+
+                <!-- Icônes et Profil -->
+                <div class="flex items-center gap-2 sm:gap-4">
+                    <div class="hidden xs:flex items-center gap-3 text-black">
+                        <i class="fa-solid fa-moon cursor-pointer"></i>
+                        <i class="fa-solid fa-bell cursor-pointer"></i>
+                    </div>
+                    <div class="flex items-center gap-2 border-l pl-2 sm:pl-4">
+                        <div class="text-right hidden md:block">
+                            <p class="text-[10px] text-gray-500">Administrateur</p>
+                            <p class="text-xs font-bold text-gray-700">Admin</p>
+                        </div>
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gray-300 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="https://ui-avatars.com" alt="avatar">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <!-- Dashboard Content -->
+            <div class="flex-1 overflow-y-auto p-4 space-y-6">
+
+                <!-- Banner Title -->
+                <section class="bg-pink-100 p-6 rounded-xl border-l-8 border-pink-500">
+                    <h1 class="text-2xl font-black text-gray-800 uppercase tracking-wide">
+                        Gestion des inscriptions - École 221
+                    </h1>
+                </section>
+
+                <!-- Stats Cards -->
+                <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-pink-50 p-5 rounded-xl">
+                    <div
+                        class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-yellow-400 flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500 text-sm">Étudiants Inscrits</p>
+                            <p id="stat_total_inscrits" class="text-4xl font-bold text-gray-800">0</p>
+                        </div>
+                        <div class="bg-orange-100 p-3 rounded-lg text-orange-500 text-2xl"><i
+                                class="fa-solid fa-user-group text-orange-400 text-2xl"></i>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-purple-600 flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500 text-sm">Inscriptions du Jour</p>
+                            <p id="stat_inscriptions_jour" class="text-4xl font-bold text-gray-800">0</p>
+                        </div>
+                        <div class="bg-purple-400 p-3 rounded-lg text-purple-600 text-2xl"><i
+                                class="fa-solid fa-book-open text-white text-2xl"></i></div>
+                    </div>
+                    <div
+                        class="bg-white p-6 rounded-2xl shadow-sm border-t-4 border-[#b52a70] flex justify-between items-center">
+                        <div>
+                            <p class="text-gray-500 text-sm">Inscriptions Archivées</p>
+                            <p id = "stat_total_archives" class="text-4xl font-bold text-gray-800">0</p>
+                        </div>
+                        <div class="bg-pink-400 p-3 rounded-lg text-pink-600 text-2xl"><i
+                                class="fa-solid fa-file-invoice text-white text-2xl"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Charts Section -->
+                <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-pink-50 p-5 rounded-xl">
+                    <!-- Bar Chart Placeholder -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm">
+                        <h3 class="font-bold text-gray-700 mb-4">Statistiques des inscriptions</h3>
+                        <p class="text-orange-500 text-xs font-bold uppercase mb-6">Évolution mensuelle</p>
+                        <div class="flex items-end justify-between h-48 px-4">
+                            <div id="bar-jan" class="w-12 bg-gray-300 rounded-t-lg h-[40%]"></div>
+                            <div id="bar-feb" class="w-12 bg-purple-400 rounded-t-lg h-[70%]"></div>
+                            <div id="bar-mar" class="w-12 bg-orange-200 rounded-t-lg h-[50%]"></div>
+                            <div id="bar-apr" class="w-12 bg-green-400 rounded-t-lg h-[90%]"></div>
+                            <div id="bar-may" class="w-12 bg-orange-500 rounded-t-lg h-[65%]"></div>
+                            <div id="bar-jun" class="w-12 bg-red-300 rounded-t-lg h-[30%]"></div>
+                        </div>
+                        <div class="flex justify-between mt-2 text-xs text-gray-400 px-4">
+                            <span>Janv</span><span>Fév</span><span>Mars</span><span>Avril</span><span>Mai</span><span>Juin</span>
+                        </div>
+                    </div>
+
+                    <!-- Donut Chart Placeholder -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col justify-center">
+                        <div class="flex items-center gap-4">
+                            <div id="donut_circle" 
+                                class="w-24 h-24 rounded-full border-[12px] border-pink-400 border-l-blue-400 border-t-purple-400">
+                            </div>
+                            <ul id = "stats_filiere_list" class="text-[10px] space-y-2 flex-1">
+                                <li class="flex justify-between"><span>• </span> <b> </b></li>
+                                <li class="flex justify-between"><span>• /span> <b> </b></li>
+                                <li class="flex justify-between"><span>• </span> <b> </b></li>
+                                <li class="flex justify-between"><span>• </span> <b> </b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Footer -->
+            <footer class="p-4 text-right text-xs text-gray-400">
+                🕒 Dernière mise à jour : 15/04/2026
+            </footer>
+        </main>
+    </div>
+
+ 
+
+    <!-- Logique spécifique à cette page (Stats, tableaux) -->
+    <script type="module" src="../js/app.js"></script>
+    
+
+
+
+
+
+
+</body>
+
+</html>
